@@ -1,16 +1,19 @@
 class Cpcv < Formula
   desc "Upload copied clipboard images to an SSH target"
   homepage "https://github.com/thapecroth/cpcv"
-  url "https://github.com/thapecroth/cpcv/releases/download/v0.4.0/cpcv-v0.4.0-macos-universal.zip"
-  sha256 "ab12980a5b22cb7e2bee0b71117214c90e40630c0670dd7dac48d4216d1e6e6f"
+  url "https://github.com/thapecroth/cpcv/releases/download/v0.4.1/cpcv-v0.4.1-macos-universal.zip"
+  sha256 "f474bb4c0a8434f5f8521a1d7a85f206665862f98a5113dfdb9621d6112170a2"
   license "MIT"
 
   depends_on macos: :big_sur
 
   def install
-    source_root = buildpath/"cpcv"
-    odie "cpcv release archive is missing its expected root directory" unless source_root.directory?
-    libexec.install source_root.children
+    # Homebrew enters the archive's single top-level directory before calling
+    # install, so buildpath is already the cpcv release root.
+    source_root = buildpath
+    odie "cpcv release archive is missing its macOS payload" unless (source_root/"macos").directory?
+    libexec.install source_root.children.reject { |entry| entry.basename.to_s == ".brew_home" }
+    bin.mkpath
 
     wrappers = {
       "cpcv" => libexec/"macos/cpcv-macos-ctl.sh",
