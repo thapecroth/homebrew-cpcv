@@ -1,8 +1,8 @@
 class Cpcv < Formula
   desc "Upload copied clipboard images to an SSH target"
   homepage "https://github.com/thapecroth/cpcv"
-  url "https://github.com/thapecroth/cpcv/releases/download/v0.4.1/cpcv-v0.4.1-macos-universal.zip"
-  sha256 "f474bb4c0a8434f5f8521a1d7a85f206665862f98a5113dfdb9621d6112170a2"
+  url "https://github.com/thapecroth/cpcv/releases/download/v0.5.0/cpcv-v0.5.0-macos-universal.zip"
+  sha256 "5332494fd88b1acbd63f30e52933b4f9ff6eebd5d2bf298a65121ea3e8f9e0d5"
   license "MIT"
 
   depends_on macos: :big_sur
